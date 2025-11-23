@@ -1,0 +1,1 @@
+{"name": "enterprise-dashboard", "version": "2.1.0", "dependencies": {"react": "^18.2.0", "typescript": "^5.0.0", "axios": "^1.4.0"}}
