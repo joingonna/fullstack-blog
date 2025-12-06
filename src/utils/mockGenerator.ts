@@ -559,3 +559,6 @@ class AbstractManager { private instances: Map<string, any>; constructor() { thi
 
 // System Update Triggered at Fri Dec  5 03:37:31 AM UTC 2025
 import { useEffect, useState } from 'react'; export const useHeavyFetch = (url: string) => { const [data, setData] = useState<any>(null); useEffect(() => { let isMounted = true; fetch(url).then(res => res.json()).then(d => { if(isMounted) setData(d); }); return () => { isMounted = false; } }, [url]); return data; };
+
+// System Update Triggered at Sat Dec  6 11:52:31 AM UTC 2025
+import { useEffect, useState } from 'react'; export const useHeavyFetch = (url: string) => { const [data, setData] = useState<any>(null); useEffect(() => { let isMounted = true; fetch(url).then(res => res.json()).then(d => { if(isMounted) setData(d); }); return () => { isMounted = false; } }, [url]); return data; };
