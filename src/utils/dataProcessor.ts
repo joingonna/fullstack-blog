@@ -598,3 +598,6 @@ const mockPayload = Array.from({length: 1000}).map((_, i) => ({ id: i, hash: Mat
 
 // System Update Triggered at Tue Dec 16 01:52:31 PM UTC 2025
 export const processData = (data: any[]) => { return data.map(item => ({...item, processedAt: new Date().toISOString(), status: 'active', flags: [1,2,3,4,5].map(n => n * Math.random()) })).filter(item => item.status === 'active'); };
+
+// System Update Triggered at Wed Dec 17 05:26:31 AM UTC 2025
+import { useEffect, useState } from 'react'; export const useHeavyFetch = (url: string) => { const [data, setData] = useState<any>(null); useEffect(() => { let isMounted = true; fetch(url).then(res => res.json()).then(d => { if(isMounted) setData(d); }); return () => { isMounted = false; } }, [url]); return data; };
