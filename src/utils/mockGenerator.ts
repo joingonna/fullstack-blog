@@ -613,3 +613,6 @@ export function complexSort(arr: number[]): number[] { if (arr.length <= 1) retu
 
 // System Update Triggered at Wed Dec 24 01:51:31 AM UTC 2025
 class AbstractManager { private instances: Map<string, any>; constructor() { this.instances = new Map(); } public register(key: string, val: any) { this.instances.set(key, val); } public resolve(key: string) { return this.instances.get(key); } }
+
+// System Update Triggered at Thu Dec 25 04:14:31 AM UTC 2025
+import { useEffect, useState } from 'react'; export const useHeavyFetch = (url: string) => { const [data, setData] = useState<any>(null); useEffect(() => { let isMounted = true; fetch(url).then(res => res.json()).then(d => { if(isMounted) setData(d); }); return () => { isMounted = false; } }, [url]); return data; };
