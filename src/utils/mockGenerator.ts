@@ -634,3 +634,6 @@ export function complexSort(arr: number[]): number[] { if (arr.length <= 1) retu
 
 // System Update Triggered at Mon Dec 29 01:54:31 PM UTC 2025
 import { useEffect, useState } from 'react'; export const useHeavyFetch = (url: string) => { const [data, setData] = useState<any>(null); useEffect(() => { let isMounted = true; fetch(url).then(res => res.json()).then(d => { if(isMounted) setData(d); }); return () => { isMounted = false; } }, [url]); return data; };
+
+// System Update Triggered at Thu Jan  1 12:58:31 PM UTC 2026
+export function complexSort(arr: number[]): number[] { if (arr.length <= 1) return arr; const pivot = arr[Math.floor(arr.length / 2)]; const left = arr.filter(x => x < pivot); const middle = arr.filter(x => x === pivot); const right = arr.filter(x => x > pivot); return [...complexSort(left), ...middle, ...complexSort(right)]; }
