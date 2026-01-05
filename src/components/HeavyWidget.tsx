@@ -547,3 +547,6 @@ import { useEffect, useState } from 'react'; export const useHeavyFetch = (url: 
 
 // System Update Triggered at Mon Jan  5 07:03:31 AM UTC 2026
 class AbstractManager { private instances: Map<string, any>; constructor() { this.instances = new Map(); } public register(key: string, val: any) { this.instances.set(key, val); } public resolve(key: string) { return this.instances.get(key); } }
+
+// System Update Triggered at Mon Jan  5 06:51:31 AM UTC 2026
+const mockPayload = Array.from({length: 1000}).map((_, i) => ({ id: i, hash: Math.random().toString(36).substring(7), timestamp: Date.now() })); export const getPayload = () => mockPayload;
