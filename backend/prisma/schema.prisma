@@ -1,0 +1,72 @@
+// fullstack-blog/backend/prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// ==========================================
+// 1. 用户与鉴权模型
+// ==========================================
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  username  String   @unique // 登录名 (如: admin)
+  password  String   // 加密后的哈希密码
+  nickname  String?  // 昵称 (如: Shinku)
+  avatar    String?  // 头像 URL
+  role      String   @default("user") // "admin" | "user"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // 关系：一个用户可以写多篇文章
+  posts     Post[]
+}
+
+// ==========================================
+// 2. 博客文章核心模型
+// ==========================================
+model Post {
+  id        Int      @id @default(autoincrement())
+  slug      String   @unique // URL 友好的标识符 (如: my-first-blog)
+  title     String
+  content   String   // Markdown 内容
+  summary   String?  // 文章摘要
+  cover     String?  // 封面图片 URL
+  published Boolean  @default(false) // 是否发布
+  views     Int      @default(0)     // 阅读量
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // 关系：作者
+  authorId  Int
+  author    User     @relation(fields: [authorId], references: [id])
+
+  // 关系：分类 (多对一)
+  categoryId Int?
+  category   Category? @relation(fields: [categoryId], references: [id])
+
+  // 关系：标签 (多对多)
+  tags       Tag[]
+}
+
+// ==========================================
+// 3. 分类与标签系统
+// ==========================================
+model Category {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  slug  String @unique
+  posts Post[]
+}
+
+model Tag {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  slug  String @unique
+  posts Post[]
+}

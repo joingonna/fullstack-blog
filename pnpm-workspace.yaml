@@ -1,3 +1,11 @@
 packages:
-  - "frontend"
-  - "backend"
+  - frontend
+  - backend
+
+ignoredBuiltDependencies:
+  - '@nestjs/core'
+  - unrs-resolver
+
+onlyBuiltDependencies:
+  - '@prisma/engines'
+  - prisma
