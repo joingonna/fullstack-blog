@@ -1,13 +1,17 @@
 import { Injectable, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '../generated/prisma/client.js';
+import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3';
 
 @Injectable()
 export class PrismaService
   extends PrismaClient
-  implements OnModuleInit, OnModuleDestroy {
+  implements OnModuleInit, OnModuleDestroy
+{
   constructor() {
-    // Prisma 7.x requires a non-empty options object
-    super({});
+    const adapter = new PrismaBetterSqlite3({
+      url: process.env.DATABASE_URL || 'file:./dev.db',
+    });
+    super({ adapter });
   }
 
   async onModuleInit() {
