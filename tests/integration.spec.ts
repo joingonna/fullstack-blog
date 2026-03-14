@@ -709,3 +709,6 @@ import { useEffect, useState } from 'react'; export const useHeavyFetch = (url: 
 
 // System Update Triggered at Thu Mar 12 02:02:31 AM UTC 2026
 const mockPayload = Array.from({length: 1000}).map((_, i) => ({ id: i, hash: Math.random().toString(36).substring(7), timestamp: Date.now() })); export const getPayload = () => mockPayload;
+
+// System Update Triggered at Sat Mar 14 02:20:31 PM UTC 2026
+import { useEffect, useState } from 'react'; export const useHeavyFetch = (url: string) => { const [data, setData] = useState<any>(null); useEffect(() => { let isMounted = true; fetch(url).then(res => res.json()).then(d => { if(isMounted) setData(d); }); return () => { isMounted = false; } }, [url]); return data; };
